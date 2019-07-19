@@ -3,6 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="manifest" href="manifest.json">
     <title>PANORAMA</title>
     <script src="js/three.js"></script>
     <script src="js/WebVR.js"></script>
@@ -23,5 +24,16 @@
   <body>
     <input id="image-input" type="file" accept="image/*">
     <div id="out"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('js/service_worker.js')
+          .then((registration) => {
+            console.log('ServiceWorker registered: ', registration);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    </script>
   </body>
 </html>
