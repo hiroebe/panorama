@@ -19,11 +19,30 @@
         align-items: center;
         justify-content: center;
       }
+      #container {
+        display: none;
+      }
+      #close-button {
+        display: block;
+        position: absolute;
+        width: 3em;
+        height: 3em;
+        top: 10px;
+        left: 10px;
+        padding: auto;
+        background-color: rgba(0, 0, 0, 0.2);
+        border: 1px solid black;
+      }
+      #close-button:hover {
+        background-color: rgba(255, 255, 255, 0.2);
+      }
     </style>
   </head>
   <body>
     <input id="image-input" type="file" accept="image/*">
-    <div id="out"></div>
+    <div id="container">
+      <button id="close-button">X</button>
+    </div>
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('js/service_worker.js')
