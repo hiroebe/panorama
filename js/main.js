@@ -5,6 +5,7 @@ window.addEventListener('DOMContentLoaded', () => {
     registerEvents();
     initVR();
 });
+window.addEventListener('resize', onResize);
 
 function registerEvents() {
     document.getElementById('image-input').addEventListener('change', e => {
@@ -17,20 +18,26 @@ function registerEvents() {
     });
 }
 
+function onResize() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(width, height);
+
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+}
+
 function initVR() {
     new WebVRPolyfill();
 
-    const winWidth = window.innerWidth;
-    const winHeight = window.innerHeight;
-
-    camera = new THREE.PerspectiveCamera(75, winWidth / winHeight, 1, 2000);
-
+    camera = new THREE.PerspectiveCamera(75, 1, 1, 2000);
     scene = new THREE.Scene();
-
     renderer = new THREE.WebGLRenderer();
-    renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(winWidth, winHeight);
     renderer.vr.enabled = true;
+
+    onResize();
 
     const container = document.getElementById('container');
     container.appendChild(renderer.domElement);
