@@ -1,6 +1,7 @@
 const CACHE_NAME = 'panorama-caches';
 const FILES_TO_CACHE = [
-    '/js/',
+    '/index.html',
+    '/dist/main.js',
 ];
 
 self.addEventListener('install', e => {

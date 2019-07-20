@@ -1,24 +1,35 @@
-let camera, scene, renderer, mesh;
-let disposables = [];
+import * as THREE from 'three';
+import { WEBVR } from 'three/examples/jsm/vr/WebVR.js';
+import WebVRPolyfill from 'webvr-polyfill'
+
+interface disposable {
+    dispose(): void;
+}
+
+let camera: THREE.PerspectiveCamera;
+let scene: THREE.Scene;
+let renderer: THREE.WebGLRenderer;
+let mesh: THREE.Mesh;
+let disposables: disposable[];
 
 window.addEventListener('DOMContentLoaded', () => {
     registerEvents();
     initVR();
 });
-window.addEventListener('resize', onResize);
+window.addEventListener('resize', resize);
 
 function registerEvents() {
     document.getElementById('image-input').addEventListener('change', e => {
-        const file = e.target.files[0];
+        const file = (e.target as HTMLInputElement).files[0];
         const blobURL = window.URL.createObjectURL(file);
         showVR(blobURL);
     });
-    document.getElementById('close-button').addEventListener('click', e => {
+    document.getElementById('close-button').addEventListener('click', () => {
         closeVR();
     });
 }
 
-function onResize() {
+function resize() {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
@@ -37,14 +48,14 @@ function initVR() {
     renderer = new THREE.WebGLRenderer();
     renderer.vr.enabled = true;
 
-    onResize();
+    resize();
 
     const container = document.getElementById('container');
     container.appendChild(renderer.domElement);
-    container.appendChild(THREE.WEBVR.createButton(renderer));
+    container.appendChild(WEBVR.createButton(renderer, null));
 }
 
-function showVR(url) {
+function showVR(url: string) {
     document.getElementById('image-input').style.display = 'none';
     document.getElementById('container').style.display = 'block';
 
@@ -74,7 +85,7 @@ function closeVR() {
     renderer.setAnimationLoop(null);
 }
 
-function getTheta(width, height) {
+function getTheta(width: number, height: number): [number, number] {
     const r = width / Math.PI / 2;
     const theta = Math.atan(height / 2 / r);
     const thetaStart = Math.PI / 2 - theta;
