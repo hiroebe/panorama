@@ -50,14 +50,14 @@ function initVR() {
 
     resize();
 
-    const container = document.getElementById('container');
+    const container = document.getElementById('vr-container');
     container.appendChild(renderer.domElement);
     container.appendChild(WEBVR.createButton(renderer, null));
 }
 
 function showVR(url: string) {
-    document.getElementById('image-input').style.display = 'none';
-    document.getElementById('container').style.display = 'block';
+    document.getElementById('title-container').style.display = 'none';
+    document.getElementById('vr-container').style.display = 'block';
 
     const loader = new THREE.TextureLoader();
     loader.load(url, texture => {
@@ -78,8 +78,8 @@ function showVR(url: string) {
 }
 
 function closeVR() {
-    document.getElementById('image-input').style.display = 'inline';
-    document.getElementById('container').style.display = 'none';
+    document.getElementById('title-container').style.display = 'flex';
+    document.getElementById('vr-container').style.display = 'none';
 
     scene.remove(mesh);
     for (const d of disposables) {

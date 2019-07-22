@@ -8,15 +8,30 @@
     <script src="dist/main.js"></script>
     <style>
       body {
-        width: 100vw;
-        height: 100vh;
         margin: 0px;
         overflow: hidden;
+      }
+      #title-container {
+        width: 100vw;
+        height: 100vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: center;
       }
-      #container {
+      #select-button {
+        padding: 0.5em;
+        font-size: 1.5em;
+        color: #ffffff;
+        background-color: hsl(110, 48%, 58%);
+      }
+      #select-button:active {
+        background-color: hsl(0, 0%, 33%);
+      }
+      #image-input {
+        display: none;
+      }
+      #vr-container {
         display: none;
       }
       #close-button {
@@ -30,14 +45,18 @@
         background-color: rgba(0, 0, 0, 0.2);
         border: 1px solid black;
       }
-      #close-button:hover {
+      #close-button:active {
         background-color: rgba(255, 255, 255, 0.2);
       }
     </style>
   </head>
   <body>
-    <input id="image-input" type="file" accept="image/*">
-    <div id="container">
+    <div id="title-container">
+      <h1 id="title">PANORAMA</h1>
+      <label id="select-button" for="image-input">Select image</label>
+      <input id="image-input" type="file" accept="image/*">
+    </div>
+    <div id="vr-container">
       <button id="close-button">X</button>
     </div>
     <script>
