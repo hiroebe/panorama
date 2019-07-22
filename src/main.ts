@@ -43,7 +43,7 @@ function resize() {
 function initVR() {
     new WebVRPolyfill();
 
-    camera = new THREE.PerspectiveCamera(75, 1, 1, 2000);
+    camera = new THREE.PerspectiveCamera(75, 1);
     scene = new THREE.Scene();
     renderer = new THREE.WebGLRenderer();
     renderer.vr.enabled = true;
@@ -67,6 +67,9 @@ function showVR(url: string) {
 
         const material = new THREE.MeshBasicMaterial({map: texture});
         mesh = new THREE.Mesh(geometry, material);
+
+        camera.fov = THREE.Math.radToDeg(thetaLength);
+        camera.updateProjectionMatrix();
 
         scene.add(mesh);
         disposables = [geometry, material, texture];

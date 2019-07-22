@@ -1,4 +1,4 @@
-const CACHE_NAME = 'panorama-caches-v1';
+const CACHE_NAME = 'panorama-caches-v1-0-0';
 const FILES_TO_CACHE = [
     './',
     './dist/main.js',
