@@ -25,7 +25,7 @@
     "webpack-cli": "^3.3.6"
   },
   "dependencies": {
-    "three": "github:hiroebe/three.js#fix-vr",
+    "three": "github:hiroebe/three.js#magic-window",
     "webvr-polyfill": "^0.10.10"
   }
 }
